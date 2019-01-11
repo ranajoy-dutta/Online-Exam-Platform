@@ -1,0 +1,21 @@
+body{
+    background-color: blanchedalmond
+}
+.container{
+    background-color : lightskyblue;
+}
+.cloud{
+    border: 0;
+    box-shadow: 0 0 2px 1px black;   
+}
+.div-right {
+    border-right: 3px solid #333;
+    border-left: 3px solid #333;
+    border-radius: 5px;
+}
+.footer{
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    font-size: 10pt;
+}

@@ -1,0 +1,32 @@
+<script>
+window.onload = function(){
+    // 200 seconds countdown
+    var countdown = 14400; 
+    //current timestamp
+    var now   = Date.parse(new Date());
+
+    //ready should be stored in your cookie
+    if ( !document.cookie )
+    {
+        document.cookie = Date.parse(new Date (now + countdown  * 1000)); // * 1000 to get ms
+    }
+
+    //every 1000 ms
+    setInterval(function()
+    {
+        var diff = ( document.cookie - Date.parse(new Date()) );
+
+        if ( diff > 0 )
+        {
+            var message = diff/1000 + " seconds left";
+        }
+        else
+        {
+            var message = "finished";
+        }
+
+        document.body.innerHTML = message;
+
+    },1000);
+}
+</script>

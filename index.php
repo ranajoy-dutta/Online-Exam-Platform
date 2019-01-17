@@ -62,7 +62,6 @@
   </div>
   </div>
 
-  <footer class="ml-2 navbar fixed-bottom navbar-light bg-faded text-right ">
   
 </body>
 </html>

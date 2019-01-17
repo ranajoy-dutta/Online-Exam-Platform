@@ -1,5 +1,17 @@
 <?php
   session_start();
+  if(isset($_SESSION['username'])){
+    echo '<h1 class="text-center mt-4"> Welcome'.$_SESSION['username'].'</h1><br>';
+    echo '<h3 class="text-center"> Please Wait! You are being redirected to your dashoard</h3>';
+    function redirect($url) {
+      ob_start();
+      header('Location: '.$url);
+      ob_end_flush();
+      die();
+    }
+    redirect('student_corner.php');
+  
+  }
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +38,8 @@
       <?php
         if (include('connection.php')){
       ?>    
-      
-      <form class="form-horizontal mt-3" action='' method='POST'>
+       
+      <form class="form-horizontal mt-3" action='s_login_server.php' method='POST'>
         <div class="form-group row">
           <label for="login_id" class="col-4">Login ID :</label>
           <div class="col-7">
@@ -50,11 +62,7 @@
   </div>
   </div>
 
-<?php 
-  if (isset($_POST["loginid"]) && isset($_POST["password"])) {
-  echo '<p class="footer">User : '.$_POST["loginid"].'</p>';
-  }
-?>
-
+  <footer class="ml-2 navbar fixed-bottom navbar-light bg-faded text-right ">
+  
 </body>
 </html>

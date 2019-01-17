@@ -36,12 +36,12 @@
     <div class="container">
     <h3>Questions</h3>
     <?php
-    $sqlquery = "select sub_name from subjects";
+    $sqlquery = "select * from subjects";
     $result = $conn->query($sqlquery);
     $sno = 1;
     while($row = $result->fetch_assoc()) {
         echo $sno.". ";
-        echo "<a href='test.php?subject=".$row['sub_name']."/'>";
+        echo "<a href='test.php?sub=".$row['sub_id']."'>";
         echo $row["sub_name"]."</a><br>";
         $sno ++;
     }

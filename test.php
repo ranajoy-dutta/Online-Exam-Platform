@@ -14,7 +14,9 @@
 </head>
 <body>
 <?php
+    // extracting variables from GET
     extract($_GET);
+
     //check for valid sign in
     if(!isset($_SESSION['username'])){
         echo "<div class='text-center'><p class='display-3'>Please Login!</p><br>";
@@ -40,6 +42,7 @@
         <div class='col-5 text-center'>Test : <?php echo $id; ?></div>
         <div class='col-4 text-right'>Total Questions : 
         <?php
+            // extracting total number of questions
             $query = "select count(*) as count from questions where test_id = '$id'";
             $result = $conn->query($query);
             while($row = $result->fetch_assoc()) {
@@ -50,43 +53,59 @@
         </div><hr>
 
         <?php
-            //$q = (int)$q;
+            // $q is current question number
+            // $next is a variable for LIMIT contraint for SQL query below
             if ($q>0){
                 $next = 1;
             }
             else{
                 $next = $q+1;
             }
+            // extracting one question at a time
             $query = "select * from questions where test_id = '$id' limit $q,$next";
             $result = $conn->query($query);
+
+            // initialising values for Next button and Previous Button
             $que_num=$q+1;
             $prev = $q-1;
+            
+            // displaying the extracted question
             if($result -> num_rows > 0){
             while($row = $result->fetch_assoc()) {
+                extract($row);
+
                 echo "<div style='display:block ' id=".$que_num.">";
                 echo "<b>".$que_num.". ";
-                extract($row);
                 echo $que_desc."</b><br>";
                 echo "<input type='radio' name=$que_num value=1>".$choice1."<br>";
                 echo "<input type='radio' name=$que_num value=2>".$choice2."<br>";
                 echo "<input type='radio' name=$que_num value=3>".$choice3."<br>";
                 echo "<input type='radio' name=$que_num value=4>".$choice4."<br><br>";
+
+                // if its not the last question
                 if ($que_num<$total){
                     echo "<div class='row'>";
+
+                    // if its first question, Previous button disabled
                     if ($que_num==1){
-                    echo "<div class='col-6 text-left'>
-                    <button class='btn btn-primary' disabled>Previous</button>
-                    </div>";}
+                        echo "<div class='col-6 text-left'>
+                        <button class='btn btn-primary' disabled>Previous</button>
+                        </div>";
+                    }
                     else{
                         echo "<div class='col-6 text-left'>
                         <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
-                        </div>";}
-                        
+                        </div>";
+                    }
+                    
+                    // Next button
                     echo "<div class='col-6 text-right'>
                     <a href=test.php?id=$id&q=$que_num><button class='btn btn-primary'>Next</button></a>
                     </div>";
                     echo "</div>";
                 }
+
+                // if its the last question, Submit button instead of Next
                 else{
                     echo "<div class='row'>";
                     echo "<div class='col-6 text-left'>

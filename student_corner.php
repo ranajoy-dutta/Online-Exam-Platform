@@ -41,7 +41,7 @@
     $sno = 1;
     while($row = $result->fetch_assoc()) {
         echo $sno.". ";
-        echo "<a href='test.php?sub=".$row['sub_id']."'>";
+        echo "<a href='testlist.php?sub=".$row['sub_id']."'>";
         echo $row["sub_name"]."</a><br>";
         $sno ++;
     }

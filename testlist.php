@@ -43,7 +43,7 @@
             $sno = 1;
             while($row = $result->fetch_assoc()) {
                 echo $sno.". ";
-                echo "<a href=test.php?id=".$row['test_id'].">";
+                echo "<a href=test.php?id=".$row['test_id']."&q=0>";
                 echo $row['test_name']."</a><br>";
                 $sno ++;
             }
@@ -52,5 +52,13 @@
             
         ?>
     <div>
+
+
+    <!-- Footer -->
+    <footer class="navbar fixed-bottom bg-faded ">
+    <?php
+    echo 'User : '.$_SESSION['username'];
+    ?>
+  </footer>
 </body>
 </html>

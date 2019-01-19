@@ -37,19 +37,19 @@
         <h2><u>List of Tests</u></h2>
         
         <?php
+        // extracting list of Test papers related to the subject
             $query = "select * from tests where sub_id = $sub";
             $result = $conn->query($query);
             if($result -> num_rows > 0){
             $sno = 1;
             while($row = $result->fetch_assoc()) {
+                extract($row);
                 echo $sno.". ";
-                echo "<a href=test.php?id=".$row['test_id']."&q=0>";
-                echo $row['test_name']."</a><br>";
+                echo "<a href=test.php?id=".$test_id."&q=0>";
+                echo $test_name."</a><br>";
                 $sno ++;
             }
-        }
-            
-            
+        }           
         ?>
     <div>
 

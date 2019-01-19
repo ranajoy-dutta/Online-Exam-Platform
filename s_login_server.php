@@ -1,6 +1,7 @@
 <?php 
   require('connection.php');
 
+  // function to redirect to another page
   function redirect($url) {
     ob_start();
     header('Location: '.$url);
@@ -8,8 +9,8 @@
     die();
   }
 
-  if (isset($_POST["loginid"]) && isset($_POST["password"])) {
   //extracting password from database
+  if (isset($_POST["loginid"]) && isset($_POST["password"])) {
   $sqlquery = "select username, password from student_login where SID = '".$_POST["loginid"]."'";
   $result = $conn->query($sqlquery);
 
@@ -20,8 +21,6 @@
       session_start();
       $_SESSION['username'] = $row["username"];
       echo 'Please wait! You are being redirecting!';
-      //echo "<b>username:</b> " . $_SESSION['username']. " <b>|| password:</b> " . $row["password"];
-
       //redirecting to student dashboard
       redirect('student_corner.php');
     }

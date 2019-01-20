@@ -11,12 +11,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="jquery.min.js"></script>
+    <script src="timer.js"></script>
+    
 </head>
 <body>
 <?php
+    if(isset($_POST['time'])){
+        $_SESSION['time'] = intval($_POST['time']);
+    }
     // extracting variables from GET
     extract($_GET);
-
     //check for valid sign in
     if(!isset($_SESSION['username'])){
         echo "<div class='text-center'><p class='display-3'>Please Login!</p><br>";
@@ -38,8 +43,12 @@
     <div class='container'>
         <h2><u>Questions</u></h2>
         <div class='row'>
-        <div class='col-3 text-left'>time : </div>
-        <div class='col-5 text-center'>Test : <?php echo $id; ?></div>
+        <div class='col-6 row text-left'>
+            <div class='col-2 pr-0' >Time Left:</div>
+            <div class=' pl-0col-9 text-left' id='time'></div> 
+            <div class=' pl-0col-9 text-left' id='timesec' hidden></div> 
+        </div>
+        <div class='col-2 text-center'>Test : <?php echo $id; ?></div>
         <div class='col-4 text-right'>Total Questions : 
         <?php
             // extracting total number of questions
@@ -51,7 +60,7 @@
             }
         ?></div>
         </div><hr>
-
+        
         <?php
             // $q is current question number
             // $next is a variable for LIMIT contraint for SQL query below
@@ -94,7 +103,7 @@
                     }
                     else{
                         echo "<div class='col-6 text-left'>
-                        <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
+                        <a href=test.php?id=$id&q=$prev onclick=timechange()><button class='btn btn-primary'>Previous</button></a>
                         </div>";
                     }
                     
@@ -120,12 +129,43 @@
             }}
         ?>
     <div>
+    
 
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded ">
     <?php
-    echo 'User : '.$_SESSION['username'];
+    echo 'User : '.$_SESSION['username'].$_SESSION['time'];
     ?>
   </footer>
+  <script>
+
+
+  window.onload = function () {
+    //alert('timer started : '+"<?php echo $_SESSION['time'].'seconds';?>");
+    var fiveMinutes = "<?php echo $_SESSION['time'];?>",
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+};
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        $.post('', {time: timer});
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
+            alert('Time Over! Your answers have been submitted!')
+            window.location ='result.php';
+            
+        }
+    }, 1000);
+    
+}
+</script>
+
 </body>
 </html>

@@ -45,6 +45,8 @@
             while($row = $result->fetch_assoc()) {
                 extract($row);
                 echo $sno.". ";
+                // test time (countdown)
+                $_SESSION['time']=60;
                 echo "<a href=test.php?id=".$test_id."&q=0>";
                 echo $test_name."</a><br>";
                 $sno ++;

@@ -157,7 +157,7 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
         $.post('', {time: timer});
         display.textContent = minutes + ":" + seconds;
-        if (--timer < 0) {
+        if (timer-- <= 0) {
             alert('Time Over! Your answers have been submitted!')
             window.location ='result.php';
             

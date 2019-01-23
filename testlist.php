@@ -46,7 +46,7 @@
                 extract($row);
                 echo $sno.". ";
                 // test time (countdown)
-                $_SESSION['time']=60;
+                $_SESSION['time']=3600;
                 echo "<a href=test.php?id=".$test_id."&q=0>";
                 echo $test_name."</a><br>";
                 $sno ++;

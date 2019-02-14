@@ -16,51 +16,67 @@
     
 </head>
 <body>
-<?php
-    if(isset($_POST['time'])){
-        $_SESSION['time'] = intval($_POST['time']);
-    }
-    // extracting variables from GET
-    extract($_GET);
-    //check for valid sign in
-    if(!isset($_SESSION['username'])){
-        echo "<div class='text-center'><p class='display-3'>Please Login!</p><br>";
-        echo "<u><a href='index.php'>Go Home</a></u>";
-        exit;
-    }
-    ?>
-    
-    <!-- Header -->
-    <div class="row m-2 text-center">
-        <h1 class="col-11">Test Page</h1>
-        <div class="col-1">
-            <a href="student_corner.php"><button class="btn btn-secondary mt-2">End Test</button></a> 
-        </div>
-    </div>
-    <hr class="cloud">
 
-    <!-- body -->
-    <div class='container'>
-        <h2><u>Questions</u></h2>
-        <div class='row'>
-        <div class='col-6 row text-left'>
-            <div class='col-2 pr-0' >Time Left:</div>
-            <div class=' pl-0col-9 text-left' id='time'></div> 
-            <div class=' pl-0col-9 text-left' id='timesec' hidden></div> 
+<?php
+if(isset($_POST['time'])){
+    $_SESSION['time'] = intval($_POST['time']);
+}
+// extracting variables from GET
+extract($_GET);
+//check for valid sign in
+if(!isset($_SESSION['username'])){
+    echo "<div class='text-center'><p class='display-3'>Please Login!</p><br>";
+    echo "<u><a href='index.php'>Go Home</a></u>";
+    exit;
+}
+?>
+
+<!-- Header -->
+<div class="row m-2 text-center">
+    <h1 class="col-11">
+        Test Name: <?php echo $id; ?>
+    </h1>
+    <div class="col-1">
+        <a href="student_corner.php"><button class="btn btn-secondary mt-2">End Test</button></a> 
+    </div>
+</div>
+<hr class="cloud">
+
+<div>
+</div>
+<!--Header -->
+<div class="row vertical-divider">
+    <div class="col-3">
+        <div class="ml-3">
+            <h3><u>Questions</u></h3>
+            <div class='ml-1 row'>
+            
+                <div class=' pr-1' >Time Left:</div>
+                <div class=' pl-1 font-weight-bold text-left' id='time'></div> 
+                <div class=' pl-1 text-left' id='timesec' hidden></div> 
+            </div>
+            <div class="row ml-1">
+            Total Questions: 
+            <?php
+                // extracting total number of questions
+                $query = "select count(*) as count from questions where test_id = '$id'";
+                $result = $conn->query($query);
+                while($row = $result->fetch_assoc()) {
+                    $total = $row['count'];
+                    echo $total;
+                }
+            ?>
+            </div>
         </div>
-        <div class='col-2 text-center'>Test : <?php echo $id; ?></div>
-        <div class='col-4 text-right'>Total Questions : 
-        <?php
-            // extracting total number of questions
-            $query = "select count(*) as count from questions where test_id = '$id'";
-            $result = $conn->query($query);
-            while($row = $result->fetch_assoc()) {
-                $total = $row['count'];
-                echo $total;
-            }
-        ?></div>
-        </div><hr>
-        
+        <hr>
+        <div><!-- question list -->
+            asdas
+        </div>
+    </div><!-- row-3 -->
+    
+
+    
+    <div class="col-9">
         <?php
             // $q is current question number
             // $next is a variable for LIMIT contraint for SQL query below
@@ -84,12 +100,12 @@
                 extract($row);
 
                 echo "<div style='display:block ' id=".$que_num.">";
-                echo "<b>".$que_num.". ";
-                echo $que_desc."</b><br>";
-                echo "<input type='radio' name=$que_num value=1>".$choice1."<br>";
-                echo "<input type='radio' name=$que_num value=2>".$choice2."<br>";
-                echo "<input type='radio' name=$que_num value=3>".$choice3."<br>";
-                echo "<input type='radio' name=$que_num value=4>".$choice4."<br><br>";
+                echo "<b><div>".$que_num.". ";
+                echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
+                echo "<input type='radio' name=$que_num value=1> ".$choice1."<br>";
+                echo "<input type='radio' name=$que_num value=2> ".$choice2."<br>";
+                echo "<input type='radio' name=$que_num value=3> ".$choice3."<br>";
+                echo "<input type='radio' name=$que_num value=4> ".$choice4."<br><br>";
 
                 // if its not the last question
                 if ($que_num<$total){
@@ -128,8 +144,8 @@
                 echo "</div>";
             }}
         ?>
-    <div>
-    
+    </div><!-- row-9-->
+</div>  <!-- row -->
 
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded ">
@@ -137,9 +153,12 @@
     echo 'User : '.$_SESSION['username'].$_SESSION['time'];
     ?>
   </footer>
+
+
+
+
+
   <script>
-
-
   window.onload = function () {
     //alert('timer started : '+"<?php echo $_SESSION['time'].'seconds';?>");
     var fiveMinutes = "<?php echo $_SESSION['time'];?>",

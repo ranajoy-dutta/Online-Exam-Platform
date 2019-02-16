@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="jquery.min.js"></script>
-    <script src="timer.js"></script>
+    
     
 </head>
 <body>

@@ -45,6 +45,14 @@
             $sno = 1;
             while($row = $result->fetch_assoc()) {
                 extract($row);
+                echo 'asdasdasdasda';
+                $attempts = array();
+                for ($y = 0; $y<9; $y++){
+                    $attempts[$y]=0;
+                }
+                $_SESSION['attempts'] = $attempts;
+
+
                 echo $sno.". ";
                 // test time (countdown)
                 $_SESSION['time']=3600;

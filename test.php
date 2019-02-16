@@ -12,8 +12,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="jquery.min.js"></script>
-    
-    
 </head>
 <body>
 
@@ -119,7 +117,7 @@ if(!isset($_SESSION['username'])){
                     }
                     else{
                         echo "<div class='col-6 text-left'>
-                        <a href=test.php?id=$id&q=$prev onclick=timechange()><button class='btn btn-primary'>Previous</button></a>
+                        <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
                         </div>";
                     }
                     

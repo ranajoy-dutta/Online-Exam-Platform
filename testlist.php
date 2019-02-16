@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-</head>
+</head> 
 <body>
-<?php
+<?php 
     extract($_GET);
     //check for valid sign in
     //testline
@@ -45,23 +45,12 @@
             $sno = 1;
             while($row = $result->fetch_assoc()) {
                 extract($row);
-                echo 'asdasdasdasda';
-                $attempts = array();
-                for ($y = 0; $y<9; $y++){
-                    $attempts[$y]=0;
-                }
-                $_SESSION['attempts'] = $attempts;
-
-
                 echo $sno.". ";
-                // test time (countdown)
-                $_SESSION['time']=3600;
-                echo "<a href=test.php?id=".$test_id."&q=0>";
+                echo "<a href=test_server.php?id=".$test_id."&q=0>";
                 echo $test_name."</a><br>";
                 $sno ++;
             }
         }           
-        ?>
     <div>
 
 

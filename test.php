@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 </head>
 <body>
 
@@ -67,8 +68,21 @@ if(!isset($_SESSION['username'])){
             </div>
         </div>
         <hr>
-        <div><!-- question list -->
-            asdas
+        <div class="container"><!-- question list -->
+            <?php
+            foreach($_SESSION['attempts'] as $x=>$x_value){
+                $ques = $x+1;
+               if ($x==(int)$q){       //if ques is current ques
+                    echo "<p class='m-0 text-warning font-weight-bold'> $ques </p>";
+                    continue;
+                }
+                if ($x_value==="f0"){       //if ques is unattempted
+                    echo "<p class='m-0 text-primary font-weight-bold'> $ques </p>";}
+                else{       //if ques is attempted
+                    echo "<p class='m-0 text-success font-weight-bold'> $ques </p>";}
+                
+            }?> 
+              
         </div>
     </div><!-- row-3 -->
     
@@ -97,13 +111,15 @@ if(!isset($_SESSION['username'])){
             while($row = $result->fetch_assoc()) {
                 extract($row);
 
+                $cur_ques = $_SESSION['attempts'][$q];
+                
                 echo "<div style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
-                echo "<input type='radio' name=$que_num value=1> ".$choice1."<br>";
-                echo "<input type='radio' name=$que_num value=2> ".$choice2."<br>";
-                echo "<input type='radio' name=$que_num value=3> ".$choice3."<br>";
-                echo "<input type='radio' name=$que_num value=4> ".$choice4."<br><br>";
+                echo "<input type='radio' onclick=ansselect($que_num,1,$cur_ques) name=$que_num value=1> ".$choice1."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,2,$cur_ques) name=$que_num value=2> ".$choice2."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,3,$cur_ques) name=$que_num value=3> ".$choice3."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,4,$cur_ques) name=$que_num value=4> ".$choice4."<br><br>";
 
                 // if its not the last question
                 if ($que_num<$total){
@@ -122,7 +138,7 @@ if(!isset($_SESSION['username'])){
                     }
                     
                     // Next button
-                    echo "<div class='col-6 text-right'>
+                    echo "<div class='col-6 text-right'> 
                     <a href=test.php?id=$id&q=$que_num><button class='btn btn-primary'>Next</button></a>
                     </div>";
                     echo "</div>";
@@ -157,6 +173,36 @@ if(!isset($_SESSION['username'])){
 
 
   <script>
+    
+    function ansselect(quesnum, ans, curqu){
+        //window.location.replace("/Online-Exam-Platform/test_server.php");
+/*        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/Online-Exam-Platform/test_server.php",
+            data: { func: "results", days: "7"}, 
+            success: function(data, status) {
+                console.log(status);
+            }
+        });
+*/
+        $.ajax({
+            type: "POST",
+            url: "/Online-Exam-Platform/test_server.php",
+            data: {quesnum,ans, curqu},
+            success: function(data, status)
+            {
+                console.log(status);
+            },
+            error: function(data, status)
+            {
+                console.log(status);
+            }
+         });
+    }
+
+
+
   window.onload = function () {
     //alert('timer started : '+"<?php echo $_SESSION['time'].'seconds';?>");
     var fiveMinutes = "<?php echo $_SESSION['time'];?>",

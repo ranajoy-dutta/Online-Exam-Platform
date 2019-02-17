@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2019 at 11:56 AM
+-- Generation Time: Feb 17, 2019 at 09:03 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -114,18 +114,20 @@ CREATE TABLE `submissions` (
 CREATE TABLE `tests` (
   `test_id` varchar(50) NOT NULL,
   `sub_id` int(11) NOT NULL,
-  `test_name` varchar(50) NOT NULL
+  `test_name` varchar(50) NOT NULL,
+  `total_ques` int(7) NOT NULL,
+  `duration` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`test_id`, `sub_id`, `test_name`) VALUES
-('math1', 1, 'Maths Test 1'),
-('prog33', 3, 'HTML language'),
-('program1', 3, 'programming'),
-('program2', 3, 'C Language test 2');
+INSERT INTO `tests` (`test_id`, `sub_id`, `test_name`, `total_ques`, `duration`) VALUES
+('math1', 1, 'Maths Test 1', 0, 0),
+('prog33', 3, 'HTML language', 0, 0),
+('program1', 3, 'programming', 4, 1800),
+('program2', 3, 'C Language test 2', 0, 0);
 
 --
 -- Indexes for dumped tables

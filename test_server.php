@@ -31,7 +31,7 @@
 		}
 		echo " | Duration : ".$duration; 
 
-
+		session_regenerate_id();
 	    $attempts = array();
 	    for ($y = 0; $y<$tq; $y++){
 	        $attempts[$y]=array('f0', 0);
@@ -52,13 +52,16 @@
 		echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
 		if ($attempt==='f1'){
 			$sqlquery = "SELECT sno FROM submissions WHERE session_id='". session_id() ."' AND 
-			test_id=$id AND quesnum=$quesnum";
+			test_id='$id' AND quesnum=$quesnum";
 			$result = $conn->query($sqlquery);
-			$sno = (int)$result['sno'];
+			$row = $result->fetch_assoc();
+			$sno = $row['sno'];
+			
 			$sql = "UPDATE submissions SET sub_ans=$ans WHERE sno=$sno";
-
+			echo $sno." ".gettype($sno)." ".$ans." ".gettype($ans);
 			if ($conn->query($sql) === TRUE) {
 				echo "success";
+				$_SESSION['attempts'][$quesnum][1]=$ans;
 				/*http_response_code(200);
 				exit;*/
 			} 
@@ -75,6 +78,7 @@
 			if ($conn->query($sql) === TRUE) {
 				echo "success";
 				$_SESSION['attempts'][$quesnum][0]='f1';
+				$_SESSION['attempts'][$quesnum][1]=$ans;
 				/*http_response_code(200);
 				exit;*/
 			} 

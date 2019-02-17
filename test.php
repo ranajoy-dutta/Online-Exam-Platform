@@ -119,11 +119,22 @@ if(!isset($_SESSION['username'])){
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
 
-                //if ($attempt)
-                echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') value=1> ".$choice1."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') value=2> ".$choice2."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt[0]','$id') value=3> ".$choice3."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') value=4> ".$choice4."<br><br>";
+                if ($attempt[1]==1)
+                    echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 checked> ".$choice1."<br>";
+                else
+                    echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 > ".$choice1."<br>";
+                if ($attempt[1]==2)
+                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> checked".$choice2."<br>";
+                else
+                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> ".$choice2."<br>";
+                if ($attempt[1]==3)
+                    echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt[0]','$id') name=$que_num value=3 checked> ".$choice3."<br>";
+                else
+                    echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt[0]','$id') name=$que_num value=3> ".$choice3."<br>";
+                if ($attempt[1]==4)
+                    echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') name=$que_num value=4 checked> ".$choice4."<br><br>";
+                else
+                    echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') name=$que_num value=4> ".$choice4."<br><br>";
 
                 // if its not the last question
                 if ($que_num<$total){
@@ -179,17 +190,7 @@ if(!isset($_SESSION['username'])){
   <script>
     
     function ansselect(quesnum, ans, attempt, id){
-        //window.location.replace("/Online-Exam-Platform/test_server.php");
-/*        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "/Online-Exam-Platform/test_server.php",
-            data: { func: "results", days: "7"}, 
-            success: function(data, status) {
-                console.log(status);
-            }
-        });
-*/
+
         $.ajax({
             type: "POST",
             url: "/Online-Exam-Platform/test_server.php",

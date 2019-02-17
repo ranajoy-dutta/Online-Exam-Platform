@@ -49,7 +49,7 @@
 		$quesnum = (int)$quesnum-1;
 		$ans = (int)$ans;
 
-		echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
+		//echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
 		if ($attempt==='f1'){
 			$sqlquery = "SELECT sno FROM submissions WHERE session_id='". session_id() ."' AND 
 			test_id='$id' AND quesnum=$quesnum";
@@ -58,17 +58,17 @@
 			$sno = $row['sno'];
 			
 			$sql = "UPDATE submissions SET sub_ans=$ans WHERE sno=$sno";
-			echo $sno." ".gettype($sno)." ".$ans." ".gettype($ans);
+			//echo $sno." ".gettype($sno)." ".$ans." ".gettype($ans);
 			if ($conn->query($sql) === TRUE) {
-				echo "success";
+				//echo "success";
 				$_SESSION['attempts'][$quesnum][1]=$ans;
-				/*http_response_code(200);
-				exit;*/
+				http_response_code(200);
+				exit;
 			} 
 			else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-				/*http_response_code(500);
-				exit;	*/
+				//echo "Error: " . $sql . "<br>" . $conn->error;
+				http_response_code(500);
+				exit;
 			}
 		}
 		else{
@@ -76,16 +76,16 @@
 			VALUES ('".session_id()."','$id',$quesnum,$ans,3)";
 
 			if ($conn->query($sql) === TRUE) {
-				echo "success";
+				//echo "success";
 				$_SESSION['attempts'][$quesnum][0]='f1';
 				$_SESSION['attempts'][$quesnum][1]=$ans;
-				/*http_response_code(200);
-				exit;*/
+				http_response_code(200);
+				exit;
 			} 
 			else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-				/*http_response_code(500);
-				exit;	*/
+				//echo "Error: " . $sql . "<br>" . $conn->error;
+				http_response_code(500);
+				exit;	
 			}
 		}
 	}

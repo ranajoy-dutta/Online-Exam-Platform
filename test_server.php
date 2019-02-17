@@ -1,11 +1,25 @@
 <?php
 	include('connection.php');
 	session_start();
+	
+	function redirect($url) {
+	    ob_start();
+	    header('Location: '.$url);
+	    ob_end_flush();
+	    die();
+    }
+
+	if(isset($_GET["endtest"])){
+		unset($_SESSION['test_in_progress']);
+		unset($_SESSION['time']);
+		unset($_SESSION['attempts']);
+		redirect("student_corner.php");
+	}
+
+
 	if(isset($_GET["id"])){
 		extract($_GET);
 		echo 'Test Server | User in session : '.$_SESSION['username']." | Test ID : $id";
-		
-
 		$sql = "SELECT * FROM tests where test_id='$id'";
 		$result = $conn->query($sql);
 
@@ -25,38 +39,53 @@
 
 	    $_SESSION['attempts'] = $attempts;
 		$_SESSION['time']=$duration;
+		$_SESSION['test_in_progress']=$id;
 		redirect("test.php?id=$id&q=0");
 	}
 
-	if(isset($_POST)){
+	if(isset($_POST['quesnum'])){
 		extract($_POST);
-		/*
-		$sqlquery = "INSERT INTO submissions ";
-		  $result = $conn->query($sqlquery);
+		$ans = (int)$ans;
+		$quesnum = (int)$quesnum;
+		$ans = (int)$ans;
 
-		  //verifying password
-		  if ($result->num_rows == 1) {
-		    $row = $result->fetch_assoc();
-		    if ($row["password"] === $_POST["password"]){
-		      session_start();
-		      $_SESSION['username'] = $row["username"];
-		      echo 'Please wait! You are being redirecting!';
-		      //redirecting to student dashboard
-		      redirect('student_corner.php');
-		    }
-	*/
-		http_response_code(200);
-		exit;	
-		
+		echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
+		if ($attempt==='f1'){
+			$sqlquery = "SELECT sno FROM submissions WHERE session_id='". session_id() ."' AND 
+			test_id=$id AND quesnum=$quesnum";
+			$result = $conn->query($sqlquery);
+			$sno = (int)$result['sno'];
+			$sql = "UPDATE submissions SET sub_ans=$ans WHERE sno=$sno";
+
+			if ($conn->query($sql) === TRUE) {
+				echo "success";
+				/*http_response_code(200);
+				exit;*/
+			} 
+			else {
+				echo "Error: " . $sql . "<br>" . $conn->error;
+				/*http_response_code(500);
+				exit;	*/
+			}
+		}
+		else{
+			$sql = "INSERT INTO submissions (session_id, test_id, quesnum, sub_ans, correct_ans)
+			VALUES ('".session_id()."','$id',$quesnum,$ans,3)";
+
+			if ($conn->query($sql) === TRUE) {
+				echo "success";
+				$_SESSION['attempts'][$quesnum]='f1';
+				/*http_response_code(200);
+				exit;*/
+			} 
+			else {
+				echo "Error: " . $sql . "<br>" . $conn->error;
+				/*http_response_code(500);
+				exit;	*/
+			}
+		}
+	}
 	
-	header("Status: 500");
-}
 
-
-	function redirect($url) {
-	    ob_start();
-	    header('Location: '.$url);
-	    ob_end_flush();
-	    die();
-    }
+	
 ?>

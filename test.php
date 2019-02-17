@@ -36,7 +36,7 @@ if(!isset($_SESSION['username'])){
         Test Name: <?php echo $id; ?>
     </h1>
     <div class="col-1">
-        <a href="student_corner.php"><button class="btn btn-secondary mt-2">End Test</button></a> 
+        <button onclick="endtest()" class="btn btn-secondary mt-2" >End Test</button>
     </div>
 </div>
 <hr class="cloud">
@@ -111,15 +111,15 @@ if(!isset($_SESSION['username'])){
             while($row = $result->fetch_assoc()) {
                 extract($row);
 
-                $cur_ques = $_SESSION['attempts'][$q];
+                $attempt = $_SESSION['attempts'][$q];
                 
                 echo "<div style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
-                echo "<input type='radio' onclick=ansselect($que_num,1,$cur_ques) name=$que_num value=1> ".$choice1."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,2,$cur_ques) name=$que_num value=2> ".$choice2."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,3,$cur_ques) name=$que_num value=3> ".$choice3."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,4,$cur_ques) name=$que_num value=4> ".$choice4."<br><br>";
+                echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt','$id') name=$que_num value=1> ".$choice1."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt','$id') name=$que_num value=2> ".$choice2."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt','$id') name=$que_num value=3> ".$choice3."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt','$id') name=$que_num value=4> ".$choice4."<br><br>";
 
                 // if its not the last question
                 if ($que_num<$total){
@@ -164,7 +164,7 @@ if(!isset($_SESSION['username'])){
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded ">
     <?php
-    echo 'User : '.$_SESSION['username'].$_SESSION['time'];
+    echo 'User : '.$_SESSION['username'].$_SESSION['time'].session_id();
     ?>
   </footer>
 
@@ -174,7 +174,7 @@ if(!isset($_SESSION['username'])){
 
   <script>
     
-    function ansselect(quesnum, ans, curqu){
+    function ansselect(quesnum, ans, attempt, id){
         //window.location.replace("/Online-Exam-Platform/test_server.php");
 /*        $.ajax({
             type: "POST",
@@ -189,7 +189,7 @@ if(!isset($_SESSION['username'])){
         $.ajax({
             type: "POST",
             url: "/Online-Exam-Platform/test_server.php",
-            data: {quesnum,ans, curqu},
+            data: {quesnum, ans, attempt, id},
             success: function(data, status)
             {
                 console.log(status);
@@ -224,12 +224,32 @@ function startTimer(duration, display) {
         display.textContent = hours + ":" + minutes + ":" + seconds;
         if (timer-- <= 0) {
             alert('Time Over! Your answers have been submitted!')
-            window.location ='result.php';
+            window.location ='test_server.php?endtest=true';
             
         }
     }, 1000);
     
 }
+
+    function endtest(){
+        alert("test ended!");
+        endtest='true';
+        $.ajax({
+            type: "GET",
+            url: "/Online-Exam-Platform/test_server.php",
+            
+            data: {endtest},
+            success: function(data, status)
+            {
+                console.log(status);
+                window.location ='student_corner.php';
+            },
+            error: function(data, status)
+            {
+                console.log(status);
+            }
+         });
+    }
 </script>
 
 </body>

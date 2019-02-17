@@ -19,6 +19,7 @@
     $row = $result->fetch_assoc();
     if ($row["password"] === $_POST["password"]){
       session_start();
+      session_regenerate_id();
       $_SESSION['username'] = $row["username"];
       echo 'Please wait! You are being redirecting!';
       //redirecting to student dashboard

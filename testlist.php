@@ -14,6 +14,14 @@
 </head> 
 <body>
 <?php 
+    if (isset($_SESSION['test_in_progress'])){
+        echo "<script>alert('Test in Progress! Please Complete or cancel the test!')</script>";
+        
+        $id = $_SESSION['test_in_progress'];
+        
+        echo "<script>window.location.replace('test.php?id=$id&q=0')</script>";
+        
+    }
     extract($_GET);
     //check for valid sign in
     //testline

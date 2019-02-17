@@ -76,10 +76,12 @@ if(!isset($_SESSION['username'])){
                     echo "<p class='m-0 text-warning font-weight-bold'> $ques </p>";
                     continue;
                 }
-                if ($x_value==="f0"){       //if ques is unattempted
-                    echo "<p class='m-0 text-primary font-weight-bold'> $ques </p>";}
+                if ($x_value[0]==="f0"){       //if ques is unattempted
+                    echo " <a href=test.php?id=$id&q=$x>
+                    <p class='m-0 text-primary font-weight-bold'> $ques </p></a>";}
                 else{       //if ques is attempted
-                    echo "<p class='m-0 text-success font-weight-bold'> $ques </p>";}
+                    echo "<a href=test.php?id=$id&q=$x>
+                    <p class='m-0 text-success font-weight-bold'> $ques </p></a>";}
                 
             }?> 
               
@@ -111,15 +113,17 @@ if(!isset($_SESSION['username'])){
             while($row = $result->fetch_assoc()) {
                 extract($row);
 
-                $attempt = $_SESSION['attempts'][$q];
+                $attempt = $_SESSION['attempts'][(int)$q];
                 
                 echo "<div style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
-                echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt','$id') name=$que_num value=1> ".$choice1."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt','$id') name=$que_num value=2> ".$choice2."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt','$id') name=$que_num value=3> ".$choice3."<br>";
-                echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt','$id') name=$que_num value=4> ".$choice4."<br><br>";
+
+                //if ($attempt)
+                echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') value=1> ".$choice1."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') value=2> ".$choice2."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,3,'$attempt[0]','$id') value=3> ".$choice3."<br>";
+                echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') value=4> ".$choice4."<br><br>";
 
                 // if its not the last question
                 if ($que_num<$total){

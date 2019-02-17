@@ -17,7 +17,7 @@
 	}
 
 
-	if(isset($_GET["id"])){
+	if(isset($_GET["newtest"])){
 		extract($_GET);
 		echo 'Test Server | User in session : '.$_SESSION['username']." | Test ID : $id";
 		$sql = "SELECT * FROM tests where test_id='$id'";
@@ -34,7 +34,7 @@
 
 	    $attempts = array();
 	    for ($y = 0; $y<$tq; $y++){
-	        $attempts[$y]='f0';
+	        $attempts[$y]=array('f0', 0);
 	    }
 
 	    $_SESSION['attempts'] = $attempts;
@@ -46,7 +46,7 @@
 	if(isset($_POST['quesnum'])){
 		extract($_POST);
 		$ans = (int)$ans;
-		$quesnum = (int)$quesnum;
+		$quesnum = (int)$quesnum-1;
 		$ans = (int)$ans;
 
 		echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
@@ -74,7 +74,7 @@
 
 			if ($conn->query($sql) === TRUE) {
 				echo "success";
-				$_SESSION['attempts'][$quesnum]='f1';
+				$_SESSION['attempts'][$quesnum][0]='f1';
 				/*http_response_code(200);
 				exit;*/
 			} 

@@ -54,7 +54,7 @@
             while($row = $result->fetch_assoc()) {
                 extract($row);
                 echo $sno.". ";
-                echo "<a href=test_server.php?id=".$test_id."&q=0>";
+                echo "<a href=test_server.php?id=".$test_id."&newtest=true>";
                 echo $test_name."</a><br>";
                 $sno ++;
             }

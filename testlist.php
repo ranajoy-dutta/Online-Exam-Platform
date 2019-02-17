@@ -10,7 +10,8 @@
     <title>Test list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
+    <link rel="stylesheet" type="text/css" href="style2.css" />
 </head> 
 <body>
 <?php 
@@ -34,7 +35,7 @@
     
     <!-- Header -->
     <div class="row m-2 text-center">
-        <h1 class="col-11">List of Tests</h1>
+        <h1 class="col-11" style="color:#2ecc71;">List of Tests</h1>
         <div class="col-1">
             <a href="student_corner.php"><button class="btn btn-secondary mt-2">Back</button></a> 
         </div>
@@ -43,7 +44,8 @@
 
     <!-- body -->
     <div class='container'>
-        <h2><u>List of Tests</u></h2>
+        <div class="box">
+        <h2 style="color:white;">List of Tests</h2>
         
         <?php
         // extracting list of Test papers related to the subject
@@ -53,17 +55,17 @@
             $sno = 1;
             while($row = $result->fetch_assoc()) {
                 extract($row);
-                echo $sno.". ";
-                echo "<a href=test_server.php?id=".$test_id."&newtest=true>";
-                echo $test_name."</a><br>";
+                echo "<a href=test_server.php?id=".$test_id."&newtest=true class='button'><span class='away'>";
+                echo $test_name."</span><span class='over'>Start</span></a><br>";
                 $sno ++;
             }
-        }     ?>      
+        }     ?>  
+    </div>    
     <div>
 
 
     <!-- Footer -->
-    <footer class="navbar fixed-bottom bg-faded ">
+    <footer class="navbar fixed-bottom bg-faded " style="color:white">
     <?php
     echo 'User : '.$_SESSION['username'];
     ?>

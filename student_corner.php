@@ -11,7 +11,8 @@
     <title>Student Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
+    <link rel="stylesheet" type="text/css" href="style2.css" />
 </head>
 <body>
     <?php
@@ -25,7 +26,7 @@
 
     <!-- Header -->
     <div class="row m-2 text-center ">
-        <h1 class="col-11">Student Dashboard</h1>
+        <h1 class="col-11" style="color:#2ecc71;">Student Dashboard</h1>
         <div class="col-1">
             <a href="logout.php"><button class="btn btn-secondary mt-2">Logout</button></a> 
         </div>
@@ -34,7 +35,8 @@
 
     <!-- Body -->
     <div class="container">
-    <h3>Questions</h3>
+        <div class="box">
+    <h3 id="head">Test</h3>
     <?php
         // extracting list of Subjects
         $sqlquery = "select * from subjects";
@@ -42,17 +44,16 @@
         $sno = 1;
         // Displaying the extracted List
         while($row = $result->fetch_assoc()) {
-            echo $sno.". ";
-            echo "<a href='testlist.php?sub=".$row['sub_id']."'>";
-            echo $row["sub_name"]."</a><br>";
+            echo "<a href='testlist.php?sub=".$row['sub_id']."'class='button'><span class='away'>";
+            echo $row["sub_name"]."</span><span class='over'>Start</span></a><br>";
             $sno ++;
         }   
     ?>
     </div>
-
+    </div>
 
     <!-- Footer -->
-    <footer class="navbar fixed-bottom bg-faded ">
+    <footer class="navbar fixed-bottom bg-faded" style="color:white;">
     <?php
     echo 'User : '.$_SESSION['username'];
     ?>

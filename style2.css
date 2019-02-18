@@ -54,3 +54,14 @@ body{
 #head{
   color: white;
 }
+
+@media screen and (max-height: 700px) {
+  .box{
+    top:60%;
+  }
+}
+@media screen and (max-height: 500px) {
+  .box{
+    top:80%;
+  }
+}

@@ -87,3 +87,18 @@ background: #2ecc71;
     font-family: 'Acme', sans-serif;
     padding-top: 40px;
 }
+@media screen and (max-height: 700px) {
+    .box{
+      top:60%;
+    }
+}
+  @media screen and (max-height: 500px) {
+    .box{
+      top:80%;
+    }
+    #headername{
+        text-align: center;
+        font-family: 'Acme', sans-serif;
+        padding-top: 0;
+    }
+  }

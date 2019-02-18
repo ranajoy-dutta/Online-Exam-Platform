@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2019 at 09:03 AM
+-- Generation Time: Feb 18, 2019 at 07:37 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -100,10 +100,26 @@ CREATE TABLE `submissions` (
   `sno` int(11) NOT NULL,
   `session_id` varchar(10000) NOT NULL,
   `test_id` varchar(50) NOT NULL,
+  `quesnum` int(7) NOT NULL,
   `sub_ans` int(1) NOT NULL,
   `correct_ans` int(1) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `submissions`
+--
+
+INSERT INTO `submissions` (`sno`, `session_id`, `test_id`, `quesnum`, `sub_ans`, `correct_ans`, `time`) VALUES
+(38, 'kk5lu22u6uhthkge5hfi1hskg2', 'program1', 0, 3, 3, '2019-02-17 16:10:40'),
+(39, 'kk5lu22u6uhthkge5hfi1hskg2', 'program1', 1, 3, 3, '2019-02-17 15:49:04'),
+(40, 'kk5lu22u6uhthkge5hfi1hskg2', 'program1', 2, 3, 3, '2019-02-17 16:10:30'),
+(41, 'kk5lu22u6uhthkge5hfi1hskg2', 'program1', 3, 3, 3, '2019-02-17 16:10:35'),
+(42, 'kk5lu22u6uhthkge5hfi1hskg2', 'program1', 1, 3, 3, '2019-02-17 16:11:17'),
+(43, 'm47nrpl9k26rljiee9qn6120f3', 'program1', 1, 4, 3, '2019-02-17 16:13:02'),
+(44, 'm47nrpl9k26rljiee9qn6120f3', 'program1', 2, 4, 3, '2019-02-17 16:13:05'),
+(45, 'm47nrpl9k26rljiee9qn6120f3', 'program1', 3, 4, 3, '2019-02-17 16:13:08'),
+(46, 'm47nrpl9k26rljiee9qn6120f3', 'program1', 0, 4, 3, '2019-02-17 16:13:14');
 
 -- --------------------------------------------------------
 
@@ -124,10 +140,7 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`test_id`, `sub_id`, `test_name`, `total_ques`, `duration`) VALUES
-('math1', 1, 'Maths Test 1', 0, 0),
-('prog33', 3, 'HTML language', 0, 0),
-('program1', 3, 'programming', 4, 1800),
-('program2', 3, 'C Language test 2', 0, 0);
+('program1', 3, 'programming', 4, 1800);
 
 --
 -- Indexes for dumped tables
@@ -184,7 +197,7 @@ ALTER TABLE `student_login`
 -- AUTO_INCREMENT for table `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

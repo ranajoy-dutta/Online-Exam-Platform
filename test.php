@@ -193,7 +193,7 @@ if(!isset($_SESSION['username'])){
 
         $.ajax({
             type: "POST",
-            url: "/Online-Exam-Platform/test_server.php",
+            url: "/Placement-Preparation-Portal/test_server.php",
             data: {quesnum, ans, attempt, id},
             success: function(data, status)
             {
@@ -241,7 +241,7 @@ function startTimer(duration, display) {
         endtest='true';
         $.ajax({
             type: "GET",
-            url: "/Online-Exam-Platform/test_server.php",
+            url: "/Placement-Preparation-Portal/test_server.php",
             
             data: {endtest},
             success: function(data, status)

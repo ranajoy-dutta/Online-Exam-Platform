@@ -13,6 +13,15 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="myscript.js"></script>
+    <script>
+        window.onload = function () {
+            //alert('timer started : '+"<?php echo $_SESSION['time'].'seconds';?>");
+            var fiveMinutes = "<?php echo $_SESSION['time'];?>",
+            display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
+        };
+</script>
 </head>
 <body>
 
@@ -187,75 +196,7 @@ if(!isset($_SESSION['username'])){
 
 
 
-  <script>
-    
-    function ansselect(quesnum, ans, attempt, id){
 
-        $.ajax({
-            type: "POST",
-            url: "/Placement-Preparation-Portal/test_server.php",
-            data: {quesnum, ans, attempt, id},
-            success: function(data, status)
-            {
-                console.log(status);
-            },
-            error: function(data, status)
-            {
-                console.log(status);
-            }
-         });
-    }
-
-
-
-  window.onload = function () {
-    //alert('timer started : '+"<?php echo $_SESSION['time'].'seconds';?>");
-    var fiveMinutes = "<?php echo $_SESSION['time'];?>",
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    
-    setInterval(function () {
-        hours = parseInt(timer / 3600, 10)
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
-
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        $.post('', {time: timer});
-        display.textContent = hours + ":" + minutes + ":" + seconds;
-        if (timer-- <= 0) {
-            alert('Time Over! Your answers have been submitted!')
-            window.location ='test_server.php?endtest=true';
-            
-        }
-    }, 1000);
-    
-}
-
-    function endtest(){
-        alert("test ended!");
-        endtest='true';
-        $.ajax({
-            type: "GET",
-            url: "/Placement-Preparation-Portal/test_server.php",
-            
-            data: {endtest},
-            success: function(data, status)
-            {
-                console.log(status);
-                window.location ='student_corner.php';
-            },
-            error: function(data, status)
-            {
-                console.log(status);
-            }
-         });
-    }
-</script>
 
 </body>
 </html>

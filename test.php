@@ -171,7 +171,7 @@ if(!isset($_SESSION['username'])){
                     <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                     </div>";
                     echo "<div class='col-6 text-right'>
-                    <button class='btn btn-danger' onclick=endtest('$id') style='background-color: #5a6268; border-color: #5a6268;'>Submit</button>
+                    <button class='btn btn-danger' onclick=endtest('$id')>Submit</button>
                     </div>";
                     echo "</div>";
                 }

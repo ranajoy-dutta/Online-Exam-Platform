@@ -27,8 +27,16 @@ The software is being developed with [@anantkaushik](https://github.com/anantkau
 
 ### Progress
 * Student 
-  * Back-End with basic front end of 
-    * Login
+  * Front End Designing of 
     * Main Dashboard
     * List of Subjects -> List of Tests
-    * Test without timer and result compilation.
+    * Test and Result Page.
+* Admin 
+  * Back-End of    
+    * Performance of Students
+    * Super-Admin and management of other Admins
+  * Front-End Designing of    
+    * Login
+    * Main Dashboard
+    * List/Creation/Modification of Subjects
+    * List/Creation/Modification of Test papers

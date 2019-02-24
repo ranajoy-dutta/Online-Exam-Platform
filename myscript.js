@@ -29,23 +29,9 @@ function ansselect(quesnum, ans, attempt, id){
             console.log(status);
         }
      });
+    $( "#choices" ).load(window.location.href + " #choices" );
 }
 function endtest(){
-    alert("test ended!");
-    endtest='true';
-    $.ajax({
-        type: "GET",
-        url: "/Placement-Preparation-Portal/test_server.php",
-        
-        data: {endtest},
-        success: function(data, status)
-        {
-            console.log(status);
-            window.location ='student_corner.php';
-        },
-        error: function(data, status)
-        {
-            console.log(status);
-        }
-    });
+    alert("test ended!!!");
+    window.location ='test_server.php?endtest=true';
 }

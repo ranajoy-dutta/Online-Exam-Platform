@@ -10,7 +10,7 @@
     <title>Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
     <script src="jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="myscript.js"></script>
@@ -45,7 +45,7 @@ if(!isset($_SESSION['username'])){
         Test Name: <?php echo $id; ?>
     </h1>
     <div class="col-1">
-        <button onclick="endtest()" class="btn btn-secondary mt-2" >End Test</button>
+        <button onclick="endtest()" class="btn btn-secondary mt-2">End Test</button>
     </div>
 </div>
 <hr class="cloud">
@@ -152,18 +152,18 @@ if(!isset($_SESSION['username'])){
                     // if its first question, Previous button disabled
                     if ($que_num==1){
                         echo "<div class='col-6 text-left'>
-                        <button class='btn btn-primary' disabled>Previous</button>
+                        <button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;' disabled>Previous</button>
                         </div>";
                     }
                     else{
                         echo "<div class='col-6 text-left'>
-                        <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
+                        <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                         </div>";
                     }
                     
                     // Next button
                     echo "<div class='col-6 text-right'> 
-                    <a href=test.php?id=$id&q=$que_num><button class='btn btn-primary'>Next</button></a>
+                    <a href=test.php?id=$id&q=$que_num><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Next</button></a>
                     </div>";
                     echo "</div>";
                 }
@@ -172,10 +172,10 @@ if(!isset($_SESSION['username'])){
                 else{
                     echo "<div class='row'>";
                     echo "<div class='col-6 text-left'>
-                    <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
+                    <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                     </div>";
                     echo "<div class='col-6 text-right'>
-                    <a href=#Result.php><button class='btn btn-danger'>Submit</button></a>
+                    <a href=#Result.php><button class='btn btn-danger' style='background-color: #5a6268; border-color: #5a6268;'>Submit</button></a>
                     </div>";
                     echo "</div>";
                 }

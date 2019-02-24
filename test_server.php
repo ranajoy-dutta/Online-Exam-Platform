@@ -10,10 +10,11 @@
     }
 
 	if(isset($_GET["endtest"])){
+		$test_id = $_SESSION['test_in_progress'];
 		unset($_SESSION['test_in_progress']);
 		unset($_SESSION['time']);
 		unset($_SESSION['attempts']);
-		redirect("student_corner.php");
+		redirect("result.php?id=$test_id");
 	}
 
 
@@ -72,9 +73,17 @@
 			}
 		}
 		else{
-			$sql = "INSERT INTO submissions (session_id, test_id, quesnum, sub_ans, correct_ans)
-			VALUES ('".session_id()."','$id',$quesnum,$ans,3)";
-
+			$userid = $_SESSION['userid'];
+			$que_id = (int)$que_id;
+			$query = "select correct_answer from questions where que_id = $que_id";
+			$result = $conn->query($query);
+			while($row = $result->fetch_assoc()) {
+				$correct_answer = $row['correct_answer'];
+			}
+			/*$sql = "INSERT INTO submissions (user_id, session_id, test_id, quesnum, sub_ans, correct_ans)
+			VALUES ($userid, '".session_id()."','$id',$quesnum,$ans, $correct_answer)";*/
+			$sql = "INSERT INTO submissions (user_id, session_id, test_id, quesnum, sub_ans)
+			VALUES ($userid, '".session_id()."','$id',$quesnum,$ans)";
 			if ($conn->query($sql) === TRUE) {
 				//echo "success";
 				$_SESSION['attempts'][$quesnum][0]='f1';

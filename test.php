@@ -46,6 +46,9 @@ if(!isset($_SESSION['username'])){
     </h1>
     <div class="col-1">
         <button onclick="endtest()" class="btn btn-secondary mt-2">End Test</button>
+        <?php
+            echo "<button onclick=endtest('$id') class='btn btn-secondary mt-2' >End Test</button>"
+        ?>
     </div>
 </div>
 <hr class="cloud">

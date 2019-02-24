@@ -45,7 +45,9 @@ if(!isset($_SESSION['username'])){
         Test Name: <?php echo $id; ?>
     </h1>
     <div class="col-1">
-        <button onclick="endtest()" class="btn btn-secondary mt-2" >End Test</button>
+        <?php
+        echo "<button onclick=endtest('$id') class='btn btn-secondary mt-2' >End Test</button>"
+        ?>
     </div>
 </div>
 <hr class="cloud">
@@ -124,7 +126,7 @@ if(!isset($_SESSION['username'])){
 
                 $attempt = $_SESSION['attempts'][(int)$q];
                 
-                echo "<div style='display:block ' id=".$que_num.">";
+                echo "<div  id='choices' style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
 
@@ -133,7 +135,7 @@ if(!isset($_SESSION['username'])){
                 else
                     echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 > ".$choice1."<br>";
                 if ($attempt[1]==2)
-                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> checked".$choice2."<br>";
+                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2 checked> ".$choice2."<br>";
                 else
                     echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> ".$choice2."<br>";
                 if ($attempt[1]==3)
@@ -175,7 +177,7 @@ if(!isset($_SESSION['username'])){
                     <a href=test.php?id=$id&q=$prev><button class='btn btn-primary'>Previous</button></a>
                     </div>";
                     echo "<div class='col-6 text-right'>
-                    <a href=#Result.php><button class='btn btn-danger'>Submit</button></a>
+                    <button class='btn btn-danger' onclick=endtest('$id')>Submit</button>
                     </div>";
                     echo "</div>";
                 }

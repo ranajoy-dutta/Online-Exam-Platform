@@ -23,7 +23,7 @@
         };
 </script>
 </head>
-<body>
+<body style="color: white;">
 
 <?php
 if(isset($_POST['time'])){
@@ -58,7 +58,7 @@ if(!isset($_SESSION['username'])){
 <div class="row vertical-divider">
     <div class="col-3">
         <div class="ml-3">
-            <h3><u>Questions</u></h3>
+            <h3 class="text-center">Questions</h3>
             <div class='ml-1 row'>
             
                 <div class=' pr-1' >Time Left:</div>
@@ -84,15 +84,15 @@ if(!isset($_SESSION['username'])){
             foreach($_SESSION['attempts'] as $x=>$x_value){
                 $ques = $x+1;
                if ($x==(int)$q){       //if ques is current ques
-                    echo "<p class='m-0 text-warning font-weight-bold'> $ques </p>";
+                    echo "<p class='m-0 text-warning font-weight-bold text-center'> $ques </p>";
                     continue;
                 }
                 if ($x_value[0]==="f0"){       //if ques is unattempted
                     echo " <a href=test.php?id=$id&q=$x>
-                    <p class='m-0 text-primary font-weight-bold'> $ques </p></a>";}
+                    <p class='m-0 text-primary font-weight-bold text-center'> $ques </p></a>";}
                 else{       //if ques is attempted
                     echo "<a href=test.php?id=$id&q=$x>
-                    <p class='m-0 text-success font-weight-bold'> $ques </p></a>";}
+                    <p class='m-0 text-success font-weight-bold text-center'> $ques </p></a>";}
                 
             }?> 
               
@@ -171,7 +171,7 @@ if(!isset($_SESSION['username'])){
                     <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                     </div>";
                     echo "<div class='col-6 text-right'>
-                    <button class='btn btn-danger' onclick=endtest('$id')>Submit</button>
+                    <button class='btn btn-danger' onclick=endtest('$id') style='background-color: #5a6268; border-color: #5a6268;'>Submit</button>
                     </div>";
                     echo "</div>";
                 }

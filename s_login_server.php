@@ -20,6 +20,7 @@
     if ($row["password"] === $_POST["password"]){
       session_start();
       session_regenerate_id();
+      $_SESSION['userid'] = $_POST["loginid"];
       $_SESSION['username'] = $row["username"];
       echo 'Please wait! You are being redirecting!';
       //redirecting to student dashboard

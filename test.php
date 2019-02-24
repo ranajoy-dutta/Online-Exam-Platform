@@ -45,9 +45,8 @@ if(!isset($_SESSION['username'])){
         Test Name: <?php echo $id; ?>
     </h1>
     <div class="col-1">
-        <button onclick="endtest()" class="btn btn-secondary mt-2">End Test</button>
         <?php
-            echo "<button onclick=endtest('$id') class='btn btn-secondary mt-2' >End Test</button>"
+        echo "<button onclick=endtest('$id') class='btn btn-secondary mt-2' >End Test</button>"
         ?>
     </div>
 </div>
@@ -115,7 +114,6 @@ if(!isset($_SESSION['username'])){
             // extracting one question at a time
             $query = "select * from questions where test_id = '$id' limit $q,$next";
             $result = $conn->query($query);
-
             // initialising values for Next button and Previous Button
             $que_num=$q+1;
             $prev = $q-1;
@@ -124,19 +122,17 @@ if(!isset($_SESSION['username'])){
             if($result -> num_rows > 0){
             while($row = $result->fetch_assoc()) {
                 extract($row);
-
                 $attempt = $_SESSION['attempts'][(int)$q];
                 
-                echo "<div style='display:block ' id=".$que_num.">";
+                echo "<div  id='choices' style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
                 echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
-
                 if ($attempt[1]==1)
                     echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 checked> ".$choice1."<br>";
                 else
                     echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 > ".$choice1."<br>";
                 if ($attempt[1]==2)
-                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> checked".$choice2."<br>";
+                    echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2 checked> ".$choice2."<br>";
                 else
                     echo "<input type='radio' onclick=ansselect($que_num,2,'$attempt[0]','$id') name=$que_num value=2> ".$choice2."<br>";
                 if ($attempt[1]==3)
@@ -147,11 +143,9 @@ if(!isset($_SESSION['username'])){
                     echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') name=$que_num value=4 checked> ".$choice4."<br><br>";
                 else
                     echo "<input type='radio' onclick=ansselect($que_num,4,'$attempt[0]','$id') name=$que_num value=4> ".$choice4."<br><br>";
-
                 // if its not the last question
                 if ($que_num<$total){
                     echo "<div class='row'>";
-
                     // if its first question, Previous button disabled
                     if ($que_num==1){
                         echo "<div class='col-6 text-left'>
@@ -170,7 +164,6 @@ if(!isset($_SESSION['username'])){
                     </div>";
                     echo "</div>";
                 }
-
                 // if its the last question, Submit button instead of Next
                 else{
                     echo "<div class='row'>";
@@ -178,7 +171,7 @@ if(!isset($_SESSION['username'])){
                     <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                     </div>";
                     echo "<div class='col-6 text-right'>
-                    <a href=#Result.php><button class='btn btn-danger' style='background-color: #5a6268; border-color: #5a6268;'>Submit</button></a>
+                    <button class='btn btn-danger' onclick=endtest('$id') style='background-color: #5a6268; border-color: #5a6268;'>Submit</button>
                     </div>";
                     echo "</div>";
                 }
@@ -194,12 +187,5 @@ if(!isset($_SESSION['username'])){
     echo 'User : '.$_SESSION['username'].$_SESSION['time'].session_id();
     ?>
   </footer>
-
-
-
-
-
-
-
 </body>
 </html>

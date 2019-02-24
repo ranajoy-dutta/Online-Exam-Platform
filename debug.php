@@ -42,6 +42,19 @@
 		<div class="col-1 font-weight-bold">----></div>
 		<div class="col-9"><?php if (isset($_SESSION['attempts'])) echo '1' ?></div>
 	</div>
+	<div class="row">		
+		<div class="col-2 font-weight-bold">attempts Values</div>
+		<div class="col-1 font-weight-bold">----></div>
+		<div class="col-9"><?php
+		
+		foreach($_SESSION['attempts'] as $key => $value) {
+		    echo "Ques=" . $key . ", Value= " . $value[0]." | ". $value[1];
+		    echo "<br>";
+		}
+
+	?></div>
+	</div>
+
 
 
 	<br>
@@ -64,6 +77,7 @@
 				else echo "Error : " . $sql . "<br>" . $conn->error; ?>
 				</div>
 	</div>
+
 </body>
 </html>
 

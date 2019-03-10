@@ -34,8 +34,7 @@
     <h1>login</h1>
       <input type="text" name='loginid' id="username" placeholder="Enter Login ID">
       <input type="password" name='password' id="pass" placeholder="Password">
-      <input type="submit" id="submit" value="login">
-    <!--<button type="submit" class="btn btn-primary btn-md">Submit</button>  -->       
+      <input type="submit" id="submit" value="login">     
   </form>
 
   <?php

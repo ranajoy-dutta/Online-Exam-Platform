@@ -24,7 +24,7 @@
         };
 </script>
 </head>
-<body style="color: white;">
+<body>
 
 <?php
 if(isset($_POST['time'])){
@@ -85,12 +85,12 @@ if(!isset($_SESSION['username'])){
             foreach($_SESSION['attempts'] as $x=>$x_value){
                 $ques = $x+1;
                if ($x==(int)$q){       //if ques is current ques
-                    echo "<p class='m-0 text-warning font-weight-bold text-center'> $ques </p>";
+                    echo "<p class='m-0 font-weight-bold text-center' style='color: rgba(128,128,128,0.5)'> $ques </p>";
                     continue;
                 }
                 if ($x_value[0]==="f0"){       //if ques is unattempted
                     echo " <a href=test.php?id=$id&q=$x>
-                    <p class='m-0 text-primary font-weight-bold text-center'> $ques </p></a>";}
+                    <p class='m-0 font-weight-bold text-center' style='color:black'> $ques </p></a>";}
                 else{       //if ques is attempted
                     echo "<a href=test.php?id=$id&q=$x>
                     <p class='m-0 text-success font-weight-bold text-center'> $ques </p></a>";}
@@ -127,7 +127,7 @@ if(!isset($_SESSION['username'])){
                 
                 echo "<div  id='choices' style='display:block ' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
-                echo $que_desc."</b></div><div class='ml-3 mr-3 mt-2'>";
+                echo $que_desc."</b></div><div class='ml-3 mr-3'>";
                 if ($attempt[1]==1)
                     echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 checked> ".$choice1."<br>";
                 else

@@ -10,7 +10,8 @@
     <title>Result | <?php extract($_GET); echo $id;?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />    
+    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style2.css" />    
 </head>
 <body>
 <?php 
@@ -23,7 +24,7 @@
     ?>
     <!-- Header -->
     <div class="row m-2 text-center">
-        <h1 class="col-11">Result Page</h1>
+        <h1 class="col-11">Result</h1>
         <div class="col-1">
             <a href="student_corner.php"><button class="btn btn-secondary mt-2">Home</button></a> 
         </div>

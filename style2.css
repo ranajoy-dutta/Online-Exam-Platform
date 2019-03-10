@@ -18,8 +18,8 @@
   width: 100%;
   height: 100%;
   padding: 20px;
-  color: #2ecc71;
-  box-shadow: 0 0 0 3px #2ecc71 inset;
+  color: rgba(105, 105, 105, 0.75);
+  box-shadow: 0 0 0 3px #696969 inset;
   background: transparent;
   text-decoration: none;
 }
@@ -44,8 +44,14 @@
   text-decoration: none;
 }
 .button:hover {
-  background: #2ecc71;
+  background: rgba(105, 105, 105, 0.75);
+  color: white;
   text-decoration: none;   
+}
+
+.mt-2{
+  background-color: rgba(105, 105, 105, 0.75);
+  border: rgba(105, 105, 105, 0.75);
 }
 
 

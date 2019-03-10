@@ -26,7 +26,7 @@
 
     <!-- Header -->
     <div class="row m-2 text-center ">
-        <h1 class="col-11" style="color:#2ecc71;">Student Dashboard</h1>
+        <h1 class="col-11">Student Dashboard</h1>
         <div class="col-1">
             <a href="logout.php"><button class="btn btn-secondary mt-2">Logout</button></a> 
         </div>

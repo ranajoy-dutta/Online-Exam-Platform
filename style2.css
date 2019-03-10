@@ -1,7 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-body{
-  background-color: #191919;
-}
 .box{
   top:40%;
 }
@@ -51,9 +48,6 @@ body{
   text-decoration: none;   
 }
 
-#head{
-  color: white;
-}
 
 @media screen and (max-height: 700px) {
   .box{

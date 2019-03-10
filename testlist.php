@@ -35,7 +35,7 @@
     
     <!-- Header -->
     <div class="row m-2 text-center">
-        <h1 class="col-11" style="color:#2ecc71;">List of Tests</h1>
+        <h1 class="col-11">List of Tests</h1>
         <div class="col-1">
             <a href="student_corner.php"><button class="btn btn-secondary mt-2">Back</button></a> 
         </div>
@@ -45,7 +45,7 @@
     <!-- body -->
     <div class='container'>
         <div class="box">
-        <h2 style="color:white;">List of Tests</h2>
+        <h2>List of Tests</h2>
         
         <?php
         // extracting list of Test papers related to the subject

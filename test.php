@@ -52,9 +52,6 @@ if(!isset($_SESSION['username'])){
     </div>
 </div>
 <hr class="cloud">
-
-<div>
-</div>
 <!--Header -->
 <div class="row vertical-divider">
     <div class="col-3">

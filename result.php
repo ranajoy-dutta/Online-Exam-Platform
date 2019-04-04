@@ -9,9 +9,8 @@
     <meta charset="utf-8" />
     <title>Result | <?php extract($_GET); echo $id;?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style2.css" />    
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
 </head>
 <body>
 <?php 
@@ -24,12 +23,13 @@
     ?>
     <!-- Header -->
     <div class="row m-2 text-center">
-        <h1 class="col-11">Result</h1>
+        <h1 class="col-11"><b>Result</b></h1>
         <div class="col-1">
             <a href="student_corner.php"><button class="btn btn-secondary mt-2">Home</button></a> 
         </div>
     </div>
     <hr class="cloud">
+
     <div>
         <p id="correct"></p>
         <p id="wrong"></p>
@@ -52,11 +52,13 @@
             }
             
             $total_wrng = $total-$total_crct;
-            echo "<div class='col-md-2'>";
-            echo "<p><b>Correct Answers : </b>".$total_crct."</p>";
-            echo "<p><b>Wrong Answers : </b>".$total_wrng."</p>";
-            //echo "<p>Unattempted Answers : ".$total_unat."</p>";
-            echo "</div>";
+            
+
+
+
+
+
+
             echo "<div class='col-md-10'>";
             $result_store = array();
             for ($y = 0; $y<$total; $y++){
@@ -84,7 +86,7 @@
                 if (isset($result_store[$sno-1][0]))
                 {if ($result_store[$sno-1][0]!=$correct_answer)
                 {
-                    //++$total_wrng;
+                    ++$total_wrng;
                     if($result_store[$sno-1][0]==1)
                         echo " <li><p class='text-danger font-weight-bold'>$choice1</p></li>";
                     else if($correct_answer==1)
@@ -111,7 +113,7 @@
                         echo "<li><p>$choice4</p></li>";
                     echo "</div>";
                 }else{
-                    //++$total_crct; 
+                    ++$total_crct; 
                     if($correct_answer==1)
                         echo "<li><p class='text-success font-weight-bold'>$choice1</p></li>";
                     else
@@ -131,7 +133,7 @@
                     echo "<ul></div>";
                 }}
                 else{
-                    //++$total_unat;
+                    ++$total_unat;
                     if($correct_answer==1)
                         echo "<li><p class='text-success font-weight-bold'>$choice1</p></li>";
                     else
@@ -152,6 +154,11 @@
                 }
                 $sno++;
             }}
+            echo "</div>";
+            echo "<div class='col-md-2' style='position:fixed; right:5px;'>";
+            echo "<p><b>Correct Answers : </b>".$total_crct."</p>";
+            echo "<p><b>Wrong Answers : </b>".$total_wrng."</p>";
+            //echo "<p>Unattempted Answers : ".$total_unat."</p>";
             echo "</div>";
         ?>
     </div>

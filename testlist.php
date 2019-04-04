@@ -9,9 +9,8 @@
     <meta charset="utf-8" />
     <title>Test list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
-    <link rel="stylesheet" type="text/css" href="style2.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head> 
 <body>
 <?php 
@@ -25,7 +24,6 @@
     }
     extract($_GET);
     //check for valid sign in
-    //testline
     if(!isset($_SESSION['username'])){
         echo "<div class='text-center'><p class='display-3'>Please Login!</p><br>";
         echo "<u><a href='index.php'>Go Home</a></u>";
@@ -43,26 +41,24 @@
     <hr class="cloud">
 
     <!-- body -->
-    <div class='container'>
-        <div class="box">
-        <h2>List of Tests</h2>
+    <div class='container box'>
+        <h2 class="pb-3"><u><b>List of Tests</b></u></h2>
         
         <?php
-        // extracting list of Test papers related to the subject
+            // extracting list of Test papers related to the subject
             $query = "select * from tests where sub_id = $sub";
             $result = $conn->query($query);
             if($result -> num_rows > 0){
-            $sno = 1;
-            while($row = $result->fetch_assoc()) {
-                extract($row);
-                echo "<a href=test_server.php?id=".$test_id."&newtest=true class='button'><span class='away'>";
-                echo $test_name."</span><span class='over'>Start</span></a><br>";
-                $sno ++;
-            }
-        }     ?>  
+                $sno = 1;
+                while($row = $result->fetch_assoc()) {
+                    extract($row);
+                    echo "<a href=test_server.php?id=".$test_id."&newtest=true class='button'><span class='away'>"  ;
+                    echo $test_name."</span><span class='over'>Start</span></a><br>";
+                    $sno ++;
+                }
+            }     
+        ?>  
     </div>    
-    <div>
-
 
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded " style="color:white">

@@ -1,0 +1,104 @@
+/************** 
+Body css
+***************/
+body {
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+background: #2a3132; 
+}
+.box {
+width: 450px;
+padding: 40px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+background: #191919;
+border: none;
+border-radius: 25px;
+text-align: center;
+}
+h1{
+color: white;
+text-transform: uppercase;
+font-weight: 500;
+letter-spacing: 5px;
+}
+/************** 
+Input Fields
+***************/
+#username, #AdminId, #name, #emailid, #loginid, #pass, #subid, #subname, #testid, #testname, #testques, #testdur, #quesid, #quesdesc, #choice1, #choice2, #choice3, #choice4, #correctans{
+border: 2px solid #0097e6;
+background: none;
+display: block;
+margin: 20px auto;
+padding: 20px 45px;
+width: 250px;
+outline: none;
+color: white;
+border-radius: 25px;
+text-align: center;
+transition: 250ms width ease, 250ms border-color ease;
+}
+/************** 
+    On Hover
+***************/
+#username:hover, #AdminId:hover,#name:hover, #emailid:hover, #loginid:hover, #pass:hover, #subid:hover, #subname:hover, #testid:hover, #testname:hover, #testques:hover, #testdur:hover, #quesid:hover, #quesdesc:hover, #choice1:hover, #choice2:hover, #choice3:hover, #choice4:hover, #correctans:hover{
+width: 300px;
+}
+/************** 
+    On Focus
+***************/
+#username:focus, #AdminId:focus, #name:focus, #emailid:focus, #loginid:focus, #pass:focus, #subid:focus, #subname:focus, #testid:focus, #testname:focus, #testques:focus, #testdur:focus, #quesid:focus, #quesdesc:focus, #choice1:focus, #choice2:focus, #choice3:focus, #choice4:focus, #correctans:focus{
+width: 250px;
+border-color: #6fb98f;
+}
+/************** 
+Submit Button
+***************/
+#submit{
+border: 2px solid #2ecc71;
+background: none;
+display: block;
+margin: 20px auto;
+text-align: center;
+padding: 15px 40px;
+outline: none;
+color: white;
+border-radius: 25px;
+cursor: pointer;
+text-transform: uppercase;
+font-weight: 200;
+transition: 250ms background ease;
+-webkit-transition: 250ms background ease;
+-moz-transition: 250ms background ease;
+-o-transition: 250ms background ease;
+}
+/************** 
+    On Hover
+***************/
+#submit:hover{
+background: #2ecc71;
+}
+
+#headername{
+    text-align: center;
+    font-family: 'Acme', sans-serif;
+    padding-top: 40px;
+}
+@media screen and (max-height: 700px) {
+    .box{
+      top:60%;
+    }
+}
+  @media screen and (max-height: 500px) {
+    .box{
+      top:80%;
+    }
+    #headername{
+        text-align: center;
+        font-family: 'Acme', sans-serif;
+        padding-top: 0;
+    }
+  }

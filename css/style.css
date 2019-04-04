@@ -1,3 +1,19 @@
+.cloud{
+    border: 0;
+    box-shadow: 0 0 2px 1px black;   
+}
+.div-right {
+    border-right: 3px solid #333;
+    border-left: 3px solid #333;
+    border-radius: 5px;
+}
+.footer{
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    font-size: 10pt;    
+}
+
 /************** 
 Body css
 ***************/
@@ -89,12 +105,12 @@ color: white;
 }
 @media screen and (max-height: 700px) {
     .box{
-      top:60%;
+      top:50%;
     }
 }
   @media screen and (max-height: 500px) {
     .box{
-      top:80%;
+      top:50%;
     }
     #headername{
         text-align: center;
@@ -104,9 +120,7 @@ color: white;
   }
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-.box{
-  top:40%;
-}
+
 .button {
   box-sizing: border-box;
   height: 50px;
@@ -160,13 +174,3 @@ color: white;
 }
 
 
-@media screen and (max-height: 700px) {
-  .box{
-    top:60%;
-  }
-}
-@media screen and (max-height: 500px) {
-  .box{
-    top:80%;
-  }
-}

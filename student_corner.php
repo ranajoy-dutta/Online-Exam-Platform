@@ -10,9 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Student Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style1.css" />
-    <link rel="stylesheet" type="text/css" href="style2.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
     <?php
@@ -34,9 +33,8 @@
     <hr class="cloud">
 
     <!-- Body -->
-    <div class="container">
-        <div class="box">
-    <h3 id="head">Test</h3>
+    <div class="container box">
+    <h3 id="head" class="pb-3"><u><b>Subjects</b></u></h3>
     <?php
         // extracting list of Subjects
         $sqlquery = "select * from subjects";
@@ -50,7 +48,7 @@
         }   
     ?>
     </div>
-    </div>
+    
 
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded" style="color:white;">

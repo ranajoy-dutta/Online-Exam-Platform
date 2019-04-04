@@ -13,27 +13,27 @@
     redirect('dashboard.php');
   
   }
-?> 
- 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Welcome | Placement Preparation Platform</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="admin/css/style1.css" rel="stylesheet" type="text/css">
+  <link href="css/style1.css" rel="stylesheet" type="text/css">
   
   <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 </head>
 
-<body class="login-body">
+<body>
 
   <h1 id="headername"> Placement Preparation Portal </h1>
   <?php
     if (include('connection.php')){
   ?>
-  <form class="box" action="s_login_server.php" method="POST">
-    <h1>Login</h1>
+  <form class="box" action="admin_server.php" method="POST">
+    <h1>Admin Login</h1>
     <?php 
       if (isset($_GET['p'])){
       echo "<h4 class='text-danger'>Invalid Password</h4>";}

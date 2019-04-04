@@ -15,6 +15,177 @@ body{
     position: absolute;
     bottom: -10px;
     left: 0px;
-    font-size: 10pt;
-    
+    font-size: 10pt;    
+}
+
+/************** 
+Body css
+***************/
+body {
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+background-color: #e6e6e6;
+}
+.box {
+width: 350px;
+padding: 40px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+background: #ffffff;
+border: none;
+border-radius: 25px;
+text-align: center;
+}
+h1{
+text-transform: uppercase;
+font-weight: 500;
+letter-spacing: 5px;
+}
+/************** 
+Input Fields
+***************/
+#username, #pass{
+border: 2px solid #f7f7f7;
+background: none;
+display: block;
+margin: 20px auto;
+padding: 15px 45px;
+width: 200px;
+outline: none;
+color: black;
+border-radius: 25px;
+text-align: center;
+transition: 250ms width ease, 250ms border-color ease;
+}
+/************** 
+    On Hover
+***************/
+#username:hover, #pass:hover{
+width: 220px;
+}
+/************** 
+    On Focus
+***************/
+#username:focus, #pass:focus{
+width: 250px;
+border-color: #f7f7f7;
+}
+/************** 
+Submit Button
+***************/
+#submit{
+border: 2px solid #f7f7f7;
+background: none;
+display: block;
+margin: 20px auto;
+text-align: center;
+padding: 15px 40px;
+outline: none;
+color: black;
+border-radius: 25px;
+cursor: pointer;
+text-transform: uppercase;
+font-weight: 200;
+transition: 250ms background ease;
+-webkit-transition: 250ms background ease;
+-moz-transition: 250ms background ease;
+-o-transition: 250ms background ease;
+}
+
+
+#submit:hover{
+background: #696969;
+color: white;
+}
+
+#headername{
+    text-align: center;
+    font-family: 'Acme', sans-serif;
+    padding-top: 40px;
+}
+@media screen and (max-height: 700px) {
+    .box{
+      top:50%;
+    }
+}
+  @media screen and (max-height: 500px) {
+    .box{
+      top:50%;
+    }
+    #headername{
+        text-align: center;
+        font-family: 'Acme', sans-serif;
+        padding-top: 0;
+    }
+  }
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.box{
+  top:50%;
+}
+.button {
+  box-sizing: border-box;
+  height: 50px;
+  width: 100%;
+  display: table;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+  transition: background 0.5s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.button span {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  color: rgba(105, 105, 105, 0.75);
+  box-shadow: 0 0 0 3px #696969 inset;
+  background: transparent;
+  text-decoration: none;
+}
+.button .away {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+}
+.button .over {
+  display: none;
+}
+.button:hover span.away {
+  display: none;
+}
+.button:hover span.over {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+  box-shadow: none;
+  text-decoration: none;
+}
+.button:hover {
+  background: rgba(105, 105, 105, 0.75);
+  color: white;
+  text-decoration: none;   
+}
+
+.mt-2{
+  background-color: rgba(105, 105, 105, 0.75);
+  border: rgba(105, 105, 105, 0.75);
+}
+
+
+@media screen and (max-height: 700px) {
+  .box{
+    top:50%;
+  }
+}
+@media screen and (max-height: 500px) {
+  .box{
+    top:50%;
+  }
 }

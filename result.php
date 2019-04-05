@@ -156,10 +156,37 @@
             }}
             echo "</div>";
             echo "<div class='col-md-2' style='position:fixed; right:5px;'>";
-            echo "<p><b>Correct Answers : </b>".$total_crct."</p>";
-            echo "<p><b>Wrong Answers : </b>".$total_wrng."</p>";
+            echo "<p class='text-success'><b>Correct Answers : </b>".$total_crct."</p>";
+            echo "<p class='text-danger'><b>Wrong Answers : </b>".$total_wrng."</p>";
+            echo "<p class='text-black'><b>Unattempted : </b>".($sno-$total_crct-$total_wrng-1)."</p>";
             //echo "<p>Unattempted Answers : ".$total_unat."</p>";
             echo "</div>";
+        $sid = $_SESSION['userid'];
+        $username = $_SESSION['username'];
+        $q=mysqli_query($conn,"select * from test_records where session_id='$sessionid'");
+        $num=mysqli_num_rows($q);
+        if($num==0){
+            $sql="INSERT INTO test_records (sid,sname,session_id,mks_obtained,incorrect) VALUES ('$sid','$username','$sessionid','$total_crct','$total_wrng')";
+            if($conn->query($sql)===true){
+                echo '<script language="javascript">';
+                echo 'console.log("Result stored")';
+                echo '</script>';
+            }
+            else{
+                echo "Error occured : ".$conn->error;
+            }
+        }
+        else{
+            echo '<script language="javascript">';
+            echo 'alert("Result Already Stored!")';
+            echo '</script>';
+        }
+    
+
+
+
+
+
         ?>
     </div>
 </body>

@@ -98,17 +98,76 @@
 				<li class="active">Results</li>
 			</ol>
 		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Test Results</h1>
-			</div>
-		</div><!--/.row-->
-		
+				
 		<div class="panel panel-container">
-		Add content here
-		</div>
-		
+		  <?php
+		  if(!isset($_GET)){
+		  echo '
+			<form action="results.php" method="GET">
+			<div class="form-group">
+			<label>Subject Name</label> 
+			<select name="subject" class="form-control">';
+              
+              // extracting list of subjects.
+                  $query = "select * from subjects order by sub_id";
+                  $rs = $conn->query($query) or die($conn->error);
+                  if($rs -> num_rows > 0){
+                  while($row = $rs->fetch_assoc()) {
+                      extract($row);
+                      echo "<option value='$sub_id'>$sub_name</option>";
+                  }
+              }     
+            echo '
+            </select>
+			</div>
+			<button type="submit" class="btn btn-md btn-primary">Search</button></form>';
+		}
+		if(isset($_GET['subject'])){
+			extract($_GET);
+			$subject = (int)$subject;
+		echo '
+			<form action="results.php" method="GET">
+			<div class="form-group">
+			<label>Test Name</label> 
+			<select name="test" class="form-control">';
+              
+              // extracting list of subjects.
+                  $query = "select * from tests where sub_id=$subject order by test_id";
+                  $rs = $conn->query($query) or die($conn->error);
+                  if($rs -> num_rows > 0){
+                  while($row = $rs->fetch_assoc()) {
+                      extract($row);
+                      echo "<option value='$test_id'>$test_name</option>";
+                  }
+              }     
+            echo '
+            </select>
+			</div>
+			<button type="submit" class="btn btn-md btn-primary">Search</button></form>';	
+		}
+	?>
+
+<table border="1" style="width: 100%; text-align: center;">
+	<thead><th class="text-center">sname</th><th class="text-center">testname</th><th class="text-center">obtained</th><th class="text-center">incorrect</th><th class="text-center">timestamp</th></thead>
+	<?php
+		// extracting details of Admin
+		$sqlquery = "select * from test_records";
+		$rs = $conn->query($sqlquery) or die($conn->error);
+        if($rs -> num_rows > 0){
+			while($row = $rs->fetch_assoc()) {
+	        	extract($row);
+	        	echo "<tr>";
+	            echo "<td>$sname</td>";
+	            echo "<td>$testname</td>";
+	            echo "<td>$mks_obtained</td>";
+	            echo "<td>$incorrect</td>";
+	            echo "<td>$time_stamp</td>";
+	            echo "</tr>";
+	        }
+	    }
+    ?>
+</table>
+
 	</div>	<!--/.main-->
 	
 	<script src="js/jquery-1.11.1.min.js"></script>

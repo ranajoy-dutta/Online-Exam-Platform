@@ -16,6 +16,7 @@ function startTimer(duration, display) {
     }, 1000);
 }
 function ansselect(quesnum, ans, attempt, id){
+    console.log(quesnum);
     $.ajax({
         type: "POST",
         url: "/Placement-Preparation-Portal/test_server.php",

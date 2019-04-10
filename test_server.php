@@ -50,7 +50,7 @@
 		$quesnum = (int)$quesnum-1;
 		$ans = (int)$ans;
 
-		//echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
+		echo $quesnum." ".$attempt." ".$ans." ".$id." ".session_id();
 		if ($attempt==='f1'){
 			$sqlquery = "SELECT sno FROM submissions WHERE session_id='". session_id() ."' AND 
 			test_id='$id' AND quesnum=$quesnum";

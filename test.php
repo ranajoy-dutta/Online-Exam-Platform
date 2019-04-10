@@ -10,7 +10,9 @@
     <title>Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" /> -->
+    <link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
     <script src="jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="myscript.js"></script>
@@ -40,33 +42,33 @@ if(!isset($_SESSION['username'])){
 ?>
 
 <!-- Header -->
-<div class="row m-2 text-center">
-    <h1 class="col-11">
-        Test Name: <?php echo $id; ?>
-    </h1>
-    <div class="col-1">
-        <?php
-        echo "<button onclick=endtest('$id') class='btn btn-secondary mt-2' >End Test</button>"
-        ?>
-    </div>
-</div>
-<hr class="cloud">
-
-<div>
-</div>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<div class="navbar-brand"><span>Test Name: <?php echo $id; ?></span></div>
+				<div class="nav navbar-top-links navbar-right">
+                    <?php
+                        echo "<div onclick=endtest('$id') class='navbar-brand'>End Test</div>"
+                    ?>		
+                </div>
+			</div>
+		</div>
+    </nav>
 <!--Header -->
-<div class="row vertical-divider">
-    <div class="col-3">
-        <div class="ml-3">
-            <h3 class="text-center">Questions</h3>
-            <div class='ml-1 row'>
-            
-                <div class=' pr-1' >Time Left:</div>
-                <div class=' pl-1 font-weight-bold text-left' id='time'></div> 
-                <div class=' pl-1 text-left' id='timesec' hidden></div> 
-            </div>
-            <div class="row ml-1">
-            Total Questions: 
+<!--SIdeBar-->
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<div class="nav menu">
+        <h3 class="active text-center">Questions</h3>
+        <hr>
+        <div class="divider"></div>        
+        <div class="pad-left">Time Left: <em class="fa fa-bar-chart" id='time'> </em></div>
+        <div class="pad-left" id="timesec" hidden></div>        
+        <div class="pad-left">
+            Total Questions:
             <?php
                 // extracting total number of questions
                 $query = "select count(*) as count from questions where test_id = '$id'";
@@ -76,33 +78,40 @@ if(!isset($_SESSION['username'])){
                     echo $total;
                 }
             ?>
-            </div>
-        </div>
-        <hr>
-        <div class="container"><!-- question list -->
+        </div>    
+        <hr>      
+
+        <div class="pad-left"><!-- question list -->
             <?php
             foreach($_SESSION['attempts'] as $x=>$x_value){
                 $ques = $x+1;
                if ($x==(int)$q){       //if ques is current ques
-                    echo "<p class='m-0 font-weight-bold text-center' style='color: rgba(128,128,128,0.5)'> $ques </p>";
+                    echo "<p class='font-weight-bold text-center' style='color: #30a5ff'> $ques </p>";
                     continue;
                 }
                 if ($x_value[0]==="f0"){       //if ques is unattempted
                     echo " <a href=test.php?id=$id&q=$x>
-                    <p class='m-0 font-weight-bold text-center' style='color:black'> $ques </p></a>";}
+                    <p class='font-weight-bold text-center' style='color:black'> $ques </p></a>";}
                 else{       //if ques is attempted
                     echo "<a href=test.php?id=$id&q=$x>
-                    <p class='m-0 text-success font-weight-bold text-center'> $ques </p></a>";}
+                    <p class='text-success font-weight-bold text-center'> $ques </p></a>";}
                 
-            }?> 
-              
+            }?>     
         </div>
-    </div><!-- row-3 -->
-    
+    </div>
+</div>
+<!-- SideBar -->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-    
-    <div class="col-9">
-        <?php
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Questions</h1>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="panel panel-container">
+		<?php
             // $q is current question number
             // $next is a variable for LIMIT contraint for SQL query below
             if ($q>0){
@@ -124,9 +133,9 @@ if(!isset($_SESSION['username'])){
                 extract($row);
                 $attempt = $_SESSION['attempts'][(int)$q];
                 
-                echo "<div  id='choices' style='display:block ' id=".$que_num.">";
+                echo "<div  id='choices' id=".$que_num.">";
                 echo "<b><div>".$que_num.". ";
-                echo $que_desc."</b></div><div class='ml-3 mr-3'>";
+                echo $que_desc."</b></div><div>";
                 if ($attempt[1]==1)
                     echo "<input type='radio' onclick=ansselect($que_num,1,'$attempt[0]','$id') name=$que_num value=1 checked> ".$choice1."<br>";
                 else
@@ -148,18 +157,18 @@ if(!isset($_SESSION['username'])){
                     echo "<div class='row'>";
                     // if its first question, Previous button disabled
                     if ($que_num==1){
-                        echo "<div class='col-6 text-left'>
+                        echo "<div class='col-md-6 text-left'>
                         <button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;' disabled>Previous</button>
                         </div>";
                     }
                     else{
-                        echo "<div class='col-6 text-left'>
+                        echo "<div class='col-md-6 text-left'>
                         <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                         </div>";
                     }
                     
                     // Next button
-                    echo "<div class='col-6 text-right'> 
+                    echo "<div class='col-md-6 text-right'> 
                     <a href=test.php?id=$id&q=$que_num><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Next</button></a>
                     </div>";
                     echo "</div>";
@@ -167,10 +176,10 @@ if(!isset($_SESSION['username'])){
                 // if its the last question, Submit button instead of Next
                 else{
                     echo "<div class='row'>";
-                    echo "<div class='col-6 text-left'>
+                    echo "<div class='col-md-6 text-left'>
                     <a href=test.php?id=$id&q=$prev><button class='btn btn-primary' style='background-color: #5a6268; border-color: #5a6268;'>Previous</button></a>
                     </div>";
-                    echo "<div class='col-6 text-right'>
+                    echo "<div class='col-md-6 text-right'>
                     <button class='btn btn-danger' onclick=endtest('$id') style='background-color: #5a6268; border-color: #5a6268;'>Submit</button>
                     </div>";
                     echo "</div>";
@@ -178,8 +187,9 @@ if(!isset($_SESSION['username'])){
                 echo "</div>";
             }}
         ?>
-    </div><!-- row-9-->
-</div>  <!-- row -->
+		</div>
+		
+	</div>	<!--/.main-->
 
     <!-- Footer -->
     <footer class="navbar fixed-bottom bg-faded ">

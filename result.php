@@ -10,7 +10,8 @@
     <title>Result | <?php extract($_GET); echo $id;?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 <?php 
@@ -22,19 +23,69 @@
     }
     ?>
     <!-- Header -->
-    <div class="row m-2 text-center">
-        <h1 class="col-11"><b>Result</b></h1>
-        <div class="col-1">
-            <a href="student_corner.php"><button class="btn btn-secondary mt-2">Home</button></a> 
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+                <div class="navbar-brand"><span>Result</span></div>
+                
+				<div class="nav navbar-top-links navbar-right">
+                <a href="student_corner.php" class='navbar-brand'>Home</a>  		
+                </div>
+			</div>
+		</div>
+    </nav>
+<!--Header -->
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<div class="nav menu">
+        <h3 class="active text-center">Questions</h3>
+        <hr>
+        <div class="divider"></div>        
+        <div class="pad-left">Time Left: <em class="fa fa-bar-chart" id='time'> </em></div>
+        <div class="pad-left" id="timesec" hidden></div>        
+        <div class="pad-left">
+            Total Questions:
+            <?php
+                // extracting total number of questions
+                $query = "select count(*) as count from questions where test_id = '$id'";
+                $result = $conn->query($query);
+                while($row = $result->fetch_assoc()) {
+                    $total = $row['count'];
+                    echo $total;
+                }
+            ?>
+        </div>    
+        <hr>      
+
+        <div class="pad-left"><!-- question list -->
+            <?php
+            foreach($_SESSION['attempts'] as $x=>$x_value){
+                $ques = $x+1;
+               if ($x==(int)$q){       //if ques is current ques
+                    echo "<p class='font-weight-bold text-center' style='color: #30a5ff'> $ques </p>";
+                    continue;
+                }
+                if ($x_value[0]==="f0"){       //if ques is unattempted
+                    echo " <a href=test.php?id=$id&q=$x>
+                    <p class='font-weight-bold text-center' style='color:black'> $ques </p></a>";}
+                else{       //if ques is attempted
+                    echo "<a href=test.php?id=$id&q=$x>
+                    <p class='text-success font-weight-bold text-center'> $ques </p></a>";}
+                
+            }?>     
         </div>
     </div>
-    <hr class="cloud">
-
+</div>
     <div>
         <p id="correct"></p>
         <p id="wrong"></p>
         <p id="unattempt"></p>
     </div>
+    
     <div class="modal-body row">
     <!-- body -->
         <?php
@@ -59,7 +110,6 @@
 
 
 
-            echo "<div class='col-md-10'>";
             $result_store = array();
             for ($y = 0; $y<$total; $y++){
                 $result_store[$y]=array(null);
@@ -77,11 +127,12 @@
             $total_crct = 0;
             $total_wrng = 0;
             $total_unat = 0;
+            echo "<div class='col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main'><div class='row'><div class='col-lg-12'><h1 class='page-header'></h1></div></div>";
             if($result -> num_rows > 0){
                 $sno = 1;
             while($roww = $result->fetch_assoc()) {
                 extract($roww); 
-                echo "<div class='col-md-12'>";
+                echo "<div class='panel panel-container'>";
                 echo "<p class='font-weight-bold'>$sno. $que_desc</p></li><ul>";
                 if (isset($result_store[$sno-1][0]))
                 {if ($result_store[$sno-1][0]!=$correct_answer)
@@ -154,13 +205,13 @@
                 }
                 $sno++;
             }}
-            echo "</div>";
-            echo "<div class='col-md-2' style='position:fixed; right:5px;'>";
+            echo "</div></div></div>";
+            echo "<div id='sidebar-collapse' class='col-sm-3 col-lg-2 sidebar'><div class='nav menu'><h3 class='active text-center'>Overview</h3><hr><div class='pad-left'>";
             echo "<p class='text-success'><b>Correct Answers : </b>".$total_crct."</p>";
             echo "<p class='text-danger'><b>Wrong Answers : </b>".$total_wrng."</p>";
             echo "<p class='text-black'><b>Unattempted : </b>".($sno-$total_crct-$total_wrng-1)."</p>";
             //echo "<p>Unattempted Answers : ".$total_unat."</p>";
-            echo "</div>";
+            echo "</div></div>";
         $sid = $_SESSION['userid'];
         $username = $_SESSION['username'];
         $q=mysqli_query($conn,"select * from test_records where session_id='$sessionid'");
